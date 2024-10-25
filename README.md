@@ -29,4 +29,4 @@ Collections : `pet_data`
               `user_data`
     
 ## Project By
-`Joe Freddie Cheeran` & `Kiran Muraleedharan`
+`Krishnendu S P`
