@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        h1{
+        color:#363c22;
+        text-align: center;
+        margin: 0;
+        background-color: white;
+    }*{
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    nav {
+        position: sticky;
+        top: 0px;
+        background-color:#363c22;
+        padding: 15px;
+    }
+    nav ul {  
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        background-color:#363c22;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+        padding: 15px 10px;
+        border-radius: 5px;
+        background-color:#363c22
+    }
+
+
+        nav li:nth-child(2) a {
+            color: #80c2a4; 
+        }
+
+        nav a:hover {
+        color: #80c2a4;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .search-result {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .search-result img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            
+        }
+
+        .search-result h2 {
+            margin: 0;
+        }
+
+        .search-result p {
+            margin: 5px 0;
+        }
+
+        .search-result button {
+            padding: 10px 20px;
+            border: none;
+            background-color: darkcyan;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-result button:hover {
+            background-color: rgb(117, 176, 176);
+        }
+
+        .search-form {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-form select {
+            margin-right: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-form button {
+            padding: 8px 20px;
+            border: none;
+            background-color: darkcyan;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background-color: rgb(117, 176, 176);
+        }
+    </style>
+</head>
+<body>
+    <h1>PETSY <img src="pics/paw.png" height="30px" alt=""></h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/adopt">Adopt Pet</a></li>   
+            <li><a href="/rescue">Rescue Pet</a></li>
+            <li><a href="/create">Sign Up</a></li>
+        </ul>
+    </nav>
+    <br>
+    <form id="searchForm" method="GET">
+        <div class="search-form">
+            <select id="petType" name="petType">
+                <option value="all">All Pets</option>
+                <option value="Cat">Cats</option>
+                <option value="Dog">Dogs</option>
+                <option value="other">Other</option>
+            </select>
+            <select id="location" name="location">
+                <option value="all">All Cities</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Bangalore">Bangalore</option>
+            </select>
+            <button id="searchBtn" type="submit">Search</button>
+        </div>
+    </form>
+
+    <div id="searchResults" class="container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchForm = document.getElementById("searchForm");
+            console.log(searchForm);
+            searchForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const formData = new FormData(searchForm);
+                const location = formData.get("location");
+                const petType = formData.get("petType");
+                console.log(formData,location,petType)
+                const url = `/pets?location=${location}&petType=${petType}`;
+                console.log(url)
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        const container = document.getElementById("searchResults");
+                        container.innerHTML = "";
+                        if (data.length === 0) {
+                            container.innerHTML = "<p>No pets found matching the search criteria.</p>";
+                            return;
+                        }
+                        data.forEach(pet => {
+                            const petCard = `
+                                <div class="search-result">
+                                    <img src="data:image/jpeg;base64, ${pet.image_data}" alt="Pet Image">
+                                    <h2>${pet.petName}</h2>
+                                    <p>Breed: ${pet.petBreed}</p>
+                                    <p>Gender: ${pet.gender}</p>
+                                    <p>Location: ${pet.location}</p>
+                                    <a href="/view?petId=${pet._id}"><button>Adopt Now</button></a>
+                                </div>
+                            `;
+                            container.insertAdjacentHTML("beforeend", petCard);
+                        });
+                    })
+                    .catch(error => console.error("Error fetching pets:", error));
+            });
+        });
+    </script>
+
+</body>
+</html>

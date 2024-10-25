@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Petsy</title>
+  <style>
+    
+    h1{
+        color:#363c22;
+        text-align: center;
+        margin: 0;
+        background-color: white;
+    }
+    #donate{
+        background-color:#313d19;
+        color: aliceblue;
+        border: none;
+        margin: 20px;
+        padding: 15px 30px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        width: 130px;
+        font-size: medium;
+    }
+    #donate:hover {
+        background-color: #6f775e;
+    }
+    *{
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    nav {
+        position: sticky;
+        top: 0px;
+        background-color:#363c22;
+        padding: 15px;
+    }
+    nav ul {  
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        background-color:#363c22;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+        padding: 15px 10px;
+        border-radius: 5px;
+        background-color:#363c22
+    }
+
+    nav a:hover {
+       color: #80c2a4;
+    }
+    nav li:nth-child(1) a {
+            color: #80c2a4; 
+        }
+
+    #banner {
+        background-image: url("pics/dog11.jpg"); 
+        background-size: cover;
+        background-position: center;
+        display: flex; 
+        justify-content: center; 
+        align-items: flex-end; 
+        height: 100%; 
+}
+
+    #adoptButton {
+        margin: 20px;
+        padding: 15px 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #313d19;
+        color: white;
+        cursor: pointer;
+        margin-top: 430px;
+        margin-bottom: 40px;
+        font-size: medium;
+        box-sizing: border-box;
+        width: 130px;
+    }
+    #adoptButton:hover{
+        background-color:#6f775e;
+    }
+    h2{
+        color:#1d250f;
+        text-align: center;
+        margin: 20;
+    }
+
+    #a1{
+        text-align: center;
+        color: black;
+        width: 85%;
+        height: 100px;
+        background: linear-gradient(to right, #eaece8, #838b75);
+        padding: 40px 25px 40px 25px;
+        line-height: 1.5;
+        border-radius: 10px;
+        font-size: medium;
+    }
+    #a2{
+        text-align: center;
+        margin-top: 60px;
+    }
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    max-width: 300px; 
+    border-radius: 10px;
+}
+
+.popup img {
+    max-width: 100%;
+    height: auto;
+}
+
+.popup p {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.popup button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #313d19;;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popup .close-button-container {
+    display: flex;
+    justify-content: center;
+}
+.popup button:hover {
+    background-color: #6f775e;
+}
+.box1{
+    margin: 0;
+
+}
+.box2{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background: white;
+    border-radius: 10px;
+    font-size: medium;
+}
+  </style>
+</head>
+<body>
+    <h1>PETSY <img src="pics/paw.png" height="30px" alt="">
+    </h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/adopt">Adopt Pet</a></li>   
+            <li><a href="/rescue">Rescue Pet</a></li>
+            <li><a href="/create">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <div id="banner">
+        <form action="/adopt">
+            <button type="submit" id="adoptButton">Adopt Me</button>
+        </form>
+    </div>
+    <div>
+        <h2>Pet Rescue & Adoption</h2>
+        <center>
+        <div id="a1" class="p-3 mb-2 bg-success text-white">
+            Looking for a loving companion? Look no further! Here, you can adopt amazing rescued animals, giving them a second chance at a happy life.we connect you with adoptable pets in your area.
+            But our mission extends beyond adoptions. If you find a lost pet you suspect might be rescued, you can call us and we will help reabilitate and unite them with new families. Together, let's build a loving community where rescued pets find their forever homes.
+        </div></center>
+        
+            <div id="a2">
+                <h2 style="color: #1d250f;">Raise Funds For Our Cause!</h2><button id="donate">Donate</button>
+            </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <img id="popupImage" src="pics/qr.png" alt="Popup Image">
+        <p id="popupLabel" style="text-align: center;">Scan the QR code</p>
+        <div class="close-button-container"><button id="closePopup" style="text-align: center;">Close</button></div>
+    </div>
+
+    <div ng-controller="myCtrl">
+        <h2 style="color: #1d250f;">See Pets we Rescued</h2><center><button style="margin: 20px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            background-color: #313d19;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 40px;
+            font-size: medium;
+            width: 130px;" ng-click="openGallery()">Photo Gallery</button></center>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp', []);
+        
+        app.controller('myCtrl', function($scope, $window) {
+          $scope.openGallery = function() {
+            $window.location.href = '/gallery';
+          };
+        });
+    </script>
+
+    <script>
+    const donateButton = document.getElementById('donate');
+    const popup = document.getElementById('popup');
+    const popupImage = document.getElementById('popupImage');
+    const popupLabel = document.getElementById('popupLabel');
+    const closePopupButton = document.getElementById('closePopup');
+    
+    donateButton.addEventListener('click', function() {
+        popup.style.display = 'block';
+    });
+    
+    closePopupButton.addEventListener('click', function() {
+        popup.style.display = 'none';
+    });
+    </script>
+
+
+</body>
+</html>

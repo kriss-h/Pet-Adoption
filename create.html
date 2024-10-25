@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    h1{
+        color:#363c22;
+        text-align: center;
+        margin: 0;
+        background-color: white;
+    }
+    *{
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    nav {
+        position: sticky;
+        top: 0px;
+        background-color:#363c22;
+        padding: 15px;
+    }
+    nav ul {  
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        background-color:#363c22;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+        padding: 15px 10px;
+        border-radius: 5px;
+        background-color:#363c22
+    }
+
+    nav a:hover {
+       color: #80c2a4;
+    }
+    nav li:nth-child(4) a {
+            color: #80c2a4; 
+        }
+
+    .box1{
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+    }
+    input,button{
+        margin-bottom: 20px;
+        height: 30px;
+        padding: auto;
+        border-radius: 6px;
+    }
+    textarea{
+        margin-bottom: 20px;
+        padding: auto;
+        border-radius: 6px;
+    }
+
+    #gender{
+        width: 165px;
+        height: 30px;
+        margin-bottom: 20px;
+        padding: auto;
+        border-radius: 6px;
+    }
+    #gender option{
+        width: 165px;
+    }
+  </style>
+</head>
+<body>
+    
+    <h1>PETSY <img src="pics/paw.png" height="30px" alt=""></h1>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/adopt">Adopt Pet</a></li>   
+            <li><a href="/rescue">Rescue Pet</a></li>
+            <li><a href="/create">Sign Up</a></li>
+        </ul>
+    </nav>
+    <br>
+    <div class="box1">
+        <div class="box2">
+            <h2 style="text-align: center; margin-top: 7px;">Register</h2>
+            <form id="signupForm" action="/create" method="post">
+                <input type="text" name="fname" placeholder="Enter First Name" pattern="[A-Za-z ]+" title="First name can only contain letters and spaces" required>
+                <input type="text" name="lname" placeholder="Enter Last Name" pattern="[A-Za-z ]+" title="Last name can only contain letters and spaces" required><br>
+                <input type="number" name="age" placeholder="Enter your Age" pattern="^(1[8-9]|[2-9][0-9]|[1-9][0-9]{2,})$" title="Age must be 18 or above" required>
+                <input type="number" name="pno" placeholder="Enter Phone Number" pattern="[0-9]{10}" title="Phone number must be 10 digits(no spaces or hyphens)" required><br>
+                <input type="number" name="pin" placeholder="Enter Pincode" pattern="[0-9]{6}" title="Pin number must be 6 digits" required>
+                <input type="text" name="city"  placeholder="Enter City Name" pattern="[A-Za-z\s]+" required><br>
+                <input type="email" name="email" placeholder="Enter your Email" size="43px" pattern="[a-z0-9]+@karunya\.edu\.in" title="Should be Kmail" required><br>
+                <input type="password" name="password" placeholder="Enter your Password" size="43px" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" title="Should contain lowercase, uppercase, number, special characters and minimum of 8 characters long" required><br><center>
+                <input type="submit" value="Register" style="background-color: darkcyan; width: 80px; color: aliceblue; margin-bottom: 5px;"></center>
+            </form>
+            <div style="text-align: center;">Head over to adopt section to adopt an adorable one :)</div>
+        </div>
+    </div> 
+</body>
+</html>
